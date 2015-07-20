@@ -46,13 +46,7 @@ public class Main {
 		TohloveBrowser browserTohlove = new TohloveBrowser(display);
 		RemoteBrowserServer server = new RemoteBrowserServer();
 		
-		server.addBrowser("tohlove", createDisplaySyncProxy(display, browserTohlove));
-		
-		try {
-			server.start();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		server.addBrowser("tohlove", (Browser)createDisplaySyncProxy(display, new Class<?>[] {Browser.class}, browserTohlove));
 		
 		this.display = display;
 		this.server = server;
@@ -103,17 +97,18 @@ public class Main {
 	}
 
 	/**
+	 * メソッド呼出しが実行される度に {@link Display#syncExec(Runnable)} によるキューの解決を待機する、
+	 * 指定されたインタフェースのプロキシ・クラスのインスタンスを返します。
 	 * 
-	 * 
-	 * @param display {@link Display}
-	 * @param instance 対象インスタンス
-	 * @return 
+	 * @param display 同期するための {@link Display}
+	 * @param interfaces プロキシ・クラスが実装するインタフェースのリスト
+	 * @param instance プロキシされる先の実装のインスタンス
+	 * @return プロキシ・クラスのインスタンス
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T createDisplaySyncProxy(final Display display, final T instance) {
-		return (T) Proxy.newProxyInstance(
-				Browser.class.getClassLoader(), 
-				new Class<?>[] {Browser.class},
+	private static Object createDisplaySyncProxy(final Display display, final Class<?>[] interfaces, final Object instance) {
+		return Proxy.newProxyInstance(
+				Main.class.getClassLoader(), 
+				interfaces,
 				new InvocationHandler() {
 					@Override
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
