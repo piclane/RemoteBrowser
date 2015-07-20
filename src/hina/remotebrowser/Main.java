@@ -128,7 +128,6 @@ public class Main {
 								} catch (InvocationTargetException e) {
 									exception[0] = e.getTargetException();
 								}
-								
 							}
 						});
 						
