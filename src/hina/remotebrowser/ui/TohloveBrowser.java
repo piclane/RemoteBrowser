@@ -69,8 +69,8 @@ public class TohloveBrowser extends AbstractBrowser {
 //		Browser browser = this.browser;
 //		
 //		browser.execute(
-//				"jQuery('#login_id').val('piclane@gmail.com');" +
-//				"jQuery('#password').val('178594');" +
+//				"jQuery('#login_id').val('email');" +
+//				"jQuery('#password').val('password');" +
 //				"jQuery('form.validator.login').submit();");
 	}
 	
