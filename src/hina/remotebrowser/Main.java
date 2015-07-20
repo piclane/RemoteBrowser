@@ -74,6 +74,12 @@ public class Main {
 	 * 処理を開始します
 	 */
 	private void start() {
+		try {
+			server.start();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
 		browser.start();
 		while (!browser.isDisposed()) {
 			if (!display.readAndDispatch()) {
