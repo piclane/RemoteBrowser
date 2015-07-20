@@ -1,5 +1,6 @@
 package hina.remotebrowser.server.servlet;
 
+import hina.remotebrowser.server.utils.ServletRequestParams;
 import hina.remotebrowser.ui.Browser;
 
 import java.io.IOException;
@@ -21,10 +22,11 @@ public class ClickServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		Browser browser = (Browser) context.getAttribute("browser");
+		ServletRequestParams params = new ServletRequestParams(req);
 		
-		int x = ServletUtil.parseIntParam(req, "x");
-		int y = ServletUtil.parseIntParam(req, "y");
-		
+		int x = params.getInt("x");
+		int y = params.getInt("y");
+
 		browser.click(x, y);
 		
 		ServletUtil.sendJsonSuccess(resp);
