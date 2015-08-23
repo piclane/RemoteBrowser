@@ -1,0 +1,40 @@
+#menu {
+    background-color: black;
+    color: white;
+    position: relative;
+
+}
+
+#menu ul {
+    font-size: 0;
+}
+
+#menu li {
+    display: block;
+    font-size: 18pt;
+    padding: 1em;
+}
+
+#menubar {
+  min-height: 1em;
+  width: 1em;
+  background-color: black;
+  position: absolute;
+  top: 0px;
+  margin: 5px 5px 6px;
+  text-decoration: none;
+  border-radius: 4px;
+  display: block;
+  vertical-align: middle;
+  padding: .438em .625em;
+  line-height: 1.125em;
+}
+
+.wrapper {
+    position: relative;
+}
+
+#console {
+    position: absolute;
+    top: 0px;
+}
